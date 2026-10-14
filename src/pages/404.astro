@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Page Not Found — Real Car Mileage";
+const description = "The page you were looking for could not be found.";
+---
+<Layout title={title} description={description}>
+  <section class="max-w-3xl mx-auto px-4 py-24 text-center">
+    <div class="font-mono text-xs uppercase tracking-wider text-[#888] dark:text-[#71717a]">404</div>
+    <h1 class="mt-2 text-4xl sm:text-5xl font-bold tracking-tight text-[#171717] dark:text-white">Page not found</h1>
+    <p class="mt-4 text-base text-[#666] dark:text-[#a1a1aa]">The page you were looking for doesn't exist or has been moved.</p>
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <a href="/" class="px-4 py-2.5 rounded-lg text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-black dark:hover:bg-zinc-200 transition-all">Go to Home</a>
+      <a href="/#tab-calc" class="px-4 py-2.5 rounded-lg text-sm font-medium border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-white hover:border-[#171717] dark:hover:border-white transition-all">Fuel Calculator</a>
+    </div>
+  </section>
+</Layout>
+---

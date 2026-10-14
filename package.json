@@ -9,10 +9,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate:data": "node scripts/build_vehicle_database.js",
+    "check": "astro check",
+    "lint": "eslint src scripts"
   },
   "dependencies": {
-    "astro": "^7.3.8"
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.8",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

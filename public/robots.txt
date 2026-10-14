@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://realcarmileage.com/sitemap-index.xml

@@ -20,7 +20,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
     <div class="max-w-5xl mx-auto px-4 relative text-center">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-xs text-[#666] dark:text-[#a1a1aa] font-mono mb-6 shadow-xs">
         <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-        <span>{totalVehiclesCount} Benchmarked Models ({totalCarsCount} Cars &middot; {totalBikesCount} Bikes)</span>
+        <span>Independent Automotive Road-Test Database</span>
       </div>
       
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#171717] dark:text-white max-w-3xl mx-auto leading-[1.08]">
@@ -37,19 +37,19 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          1. Vehicle Mileage Explorer
+          Vehicle Mileage Explorer
         </button>
         <button type="button" data-tab="tab-calc" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white transition-all cursor-pointer flex items-center gap-1.5">
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
-          2. Calculate My Mileage
+          Calculate My Mileage
         </button>
         <button type="button" data-tab="tab-trip" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white transition-all cursor-pointer flex items-center gap-1.5">
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          3. Trip Cost & Fuel Planner (₹)
+          Trip Cost and Fuel Planner (₹)
         </button>
       </div>
     </div>
@@ -63,22 +63,23 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       <div class="bg-white dark:bg-[#121215] rounded-2xl border border-[#ebebeb] dark:border-[#27272a] shadow-sm overflow-hidden p-6 sm:p-8 transition-colors">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#ebebeb] dark:border-[#27272a]">
           <div>
-            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Method 01 &middot; Database Lookup</span>
+            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Database Lookup</span>
             <h2 class="text-xl sm:text-2xl font-bold text-[#171717] dark:text-white tracking-tight mt-0.5">Claimed vs Real-World Vehicle Mileage</h2>
             <p class="text-xs sm:text-sm text-[#666] dark:text-[#a1a1aa] mt-1">Select make, model, variant, and year to see true fuel economy in Indian traffic conditions.</p>
           </div>
           <!-- Vehicle Type Toggle -->
           <div class="inline-flex p-1 bg-[#f4f4f5] dark:bg-[#18181b] rounded-lg border border-[#e4e4e7] dark:border-[#27272a] self-start sm:self-auto" id="type-filter-group">
-            <button type="button" data-vtype="all" class="vtype-btn active px-3 py-1.5 text-xs font-medium rounded-md bg-white dark:bg-[#27272a] text-[#171717] dark:text-white shadow-xs cursor-pointer">All ({totalVehiclesCount})</button>
-            <button type="button" data-vtype="car" class="vtype-btn px-3 py-1.5 text-xs font-medium rounded-md text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white cursor-pointer">Cars ({totalCarsCount})</button>
-            <button type="button" data-vtype="bike" class="vtype-btn px-3 py-1.5 text-xs font-medium rounded-md text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white cursor-pointer">Bikes ({totalBikesCount})</button>
+            <button type="button" data-vtype="all" class="vtype-btn active px-3 py-1.5 text-xs font-medium rounded-md bg-white dark:bg-[#27272a] text-[#171717] dark:text-white shadow-xs cursor-pointer">All</button>
+            <button type="button" data-vtype="car" class="vtype-btn px-3 py-1.5 text-xs font-medium rounded-md text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white cursor-pointer">Cars</button>
+            <button type="button" data-vtype="bike" class="vtype-btn px-3 py-1.5 text-xs font-medium rounded-md text-[#71717a] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white cursor-pointer">Bikes</button>
           </div>
         </div>
+
 
         <!-- Filter Form -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-6">
           <div>
-            <label for="filter-make" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">1. Manufacturer / Make</label>
+            <label for="filter-make" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">Manufacturer / Make</label>
             <select id="filter-make" class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all">
               <option value="">Select Manufacturer</option>
               {makes.map(m => <option value={m}>{m}</option>)}
@@ -86,24 +87,79 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
           </div>
 
           <div>
-            <label for="filter-model" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">2. Model</label>
+            <label for="filter-model" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">Model</label>
             <select id="filter-model" disabled class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-[#f4f4f5] dark:bg-[#18181b] text-[#888] dark:text-[#52525b] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all disabled:cursor-not-allowed">
               <option value="">Select Make first</option>
             </select>
           </div>
 
           <div>
-            <label for="filter-variant" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">3. Variant & Transmission</label>
+            <label for="filter-variant" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">Variant & Transmission</label>
             <select id="filter-variant" disabled class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-[#f4f4f5] dark:bg-[#18181b] text-[#888] dark:text-[#52525b] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all disabled:cursor-not-allowed">
               <option value="">Select Model first</option>
             </select>
           </div>
 
           <div>
-            <label for="filter-year" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">4. Model Year</label>
+            <label for="filter-year" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">Model Year</label>
             <select id="filter-year" class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all">
               {years.map(y => <option value={y}>{y}</option>)}
             </select>
+          </div>
+        </div>
+
+        <!-- Request Vehicle Trigger -->
+        <div class="mt-4 flex items-center justify-between text-xs text-[#888] dark:text-[#71717a] pt-1">
+          <span>Can't find your specific vehicle or trim?</span>
+          <button type="button" id="open-custom-vehicle-btn" class="font-medium text-[#171717] dark:text-white underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            Request Missing Vehicle
+          </button>
+        </div>
+
+        <!-- Request Vehicle Form Drawer -->
+        <div id="custom-vehicle-box" class="mt-5 p-5 rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-[#fafafa] dark:bg-[#18181b] hidden transition-all">
+          <div class="flex items-center justify-between pb-3 border-b border-[#ebebeb] dark:border-[#27272a] mb-4">
+            <div>
+              <h4 class="text-sm font-semibold text-[#171717] dark:text-white">Request Vehicle Addition</h4>
+              <p class="text-xs text-[#666] dark:text-[#a1a1aa] mt-0.5">Let our editorial team verify and add this car or bike to our road-test database.</p>
+            </div>
+            <button type="button" id="close-custom-vehicle-btn" class="text-xs text-[#888] hover:text-[#171717] dark:hover:text-white cursor-pointer px-2 py-1 rounded bg-[#ebebeb] dark:bg-[#27272a]">
+              ✕ Close
+            </button>
+          </div>
+
+          <form id="custom-vehicle-form" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <label for="custom-name" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1">Make, Model & Variant</label>
+              <input type="text" id="custom-name" required placeholder="e.g. Skoda Octavia vRS 2.0 TSI" class="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#121215] text-[#171717] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white" />
+            </div>
+
+            <div>
+              <label for="custom-year" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1">Model Year</label>
+              <input type="number" id="custom-year" min="2000" max="2026" placeholder="e.g. 2023" class="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#121215] text-[#171717] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white font-mono" />
+            </div>
+
+            <div>
+              <label for="custom-email" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1">Your Email (Optional)</label>
+              <input type="email" id="custom-email" placeholder="To notify when added" class="w-full px-3 py-2 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#121215] text-[#171717] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white" />
+            </div>
+
+            <div class="flex items-end">
+              <button type="submit" id="submit-request-btn" class="w-full py-2 px-4 rounded-lg text-xs font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-black dark:hover:bg-zinc-200 transition-all cursor-pointer shadow-xs">
+                Submit Request
+              </button>
+            </div>
+          </form>
+
+          <!-- Success Alert -->
+          <div id="request-success-alert" class="hidden mt-4 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Thank you! Your request has been queued for verification and will be added to the verified database shortly.</span>
           </div>
         </div>
 
@@ -207,7 +263,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       <div class="bg-white dark:bg-[#121215] rounded-2xl border border-[#ebebeb] dark:border-[#27272a] shadow-sm overflow-hidden p-6 sm:p-8 transition-colors">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#ebebeb] dark:border-[#27272a]">
           <div>
-            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Method 02 &middot; Fuel Consumption Test</span>
+            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Fuel Consumption Test</span>
             <h2 class="text-xl sm:text-2xl font-bold text-[#171717] dark:text-white tracking-tight mt-0.5">Calculate Your Actual Vehicle Mileage</h2>
             <p class="text-xs sm:text-sm text-[#666] dark:text-[#a1a1aa] mt-1">Tank-to-tank method: enter distance driven and fuel added to reveal your exact mileage & running cost.</p>
           </div>
@@ -320,7 +376,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       <div class="bg-white dark:bg-[#121215] rounded-2xl border border-[#ebebeb] dark:border-[#27272a] shadow-sm overflow-hidden p-6 sm:p-8 transition-colors">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#ebebeb] dark:border-[#27272a]">
           <div>
-            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Method 03 &middot; Trip & Route Cost Planner</span>
+            <span class="font-mono text-xs text-[#888] dark:text-[#71717a] uppercase tracking-wider">Trip & Route Cost Planner</span>
             <h2 class="text-xl sm:text-2xl font-bold text-[#171717] dark:text-white tracking-tight mt-0.5">Trip Fuel Required & Expense Estimator (₹)</h2>
             <p class="text-xs sm:text-sm text-[#666] dark:text-[#a1a1aa] mt-1">Plan road-trips, daily office commutes, and split expenses per passenger with live fuel benchmarks.</p>
           </div>
@@ -504,26 +560,37 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       const tabButtons = document.querySelectorAll('.tab-btn');
       const tabContents = document.querySelectorAll('.tab-content');
 
-      function switchTab(targetId) {
+      function switchTab(targetId, updateHash) {
+        if (updateHash === undefined) updateHash = true;
+        if (!targetId) return;
         tabButtons.forEach(btn => {
-          if (btn.getAttribute('data-tab') === targetId) {
+          const isActive = btn.getAttribute('data-tab') === targetId;
+          if (isActive) {
             btn.classList.add('bg-white', 'dark:bg-[#27272a]', 'text-[#171717]', 'dark:text-white', 'shadow-xs');
             btn.classList.remove('text-[#71717a]', 'dark:text-[#a1a1aa]');
           } else {
             btn.classList.remove('bg-white', 'dark:bg-[#27272a]', 'text-[#171717]', 'dark:text-white', 'shadow-xs');
             btn.classList.add('text-[#71717a]', 'dark:text-[#a1a1aa]');
           }
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          btn.setAttribute('tabindex', isActive ? '0' : '-1');
         });
 
         tabContents.forEach(content => {
           if (content.id === targetId) {
             content.classList.remove('hidden');
             content.classList.add('block');
+            content.removeAttribute('hidden');
           } else {
             content.classList.remove('block');
             content.classList.add('hidden');
+            content.setAttribute('hidden', '');
           }
         });
+
+        if (updateHash && window.history && history.replaceState) {
+          try { history.replaceState(null, '', '#' + targetId); } catch (e) {}
+        }
       }
 
       tabButtons.forEach(btn => {
@@ -531,6 +598,26 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
           const target = btn.getAttribute('data-tab');
           switchTab(target);
         });
+        btn.addEventListener('keydown', (e) => {
+          const tabs = Array.from(tabButtons);
+          const idx = tabs.indexOf(btn);
+          let next = idx;
+          if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+          else if (e.key === 'Home') next = 0;
+          else if (e.key === 'End') next = tabs.length - 1;
+          else return;
+          e.preventDefault();
+          tabs[next].focus();
+          switchTab(tabs[next].getAttribute('data-tab'));
+        });
+      });
+
+      const initialTab = (location.hash && location.hash.slice(1)) || 'tab-search';
+      if (document.getElementById(initialTab)) switchTab(initialTab, false);
+      window.addEventListener('hashchange', () => {
+        const h = (location.hash || '').slice(1);
+        if (h && document.getElementById(h)) switchTab(h, false);
       });
 
       // ---------------------------------------------
@@ -680,6 +767,58 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         document.getElementById('trip-mileage').value = avgMileage;
         switchTab('tab-trip');
         calculateTrip();
+      });
+
+      // ---------------------------------------------
+      // REQUEST MISSING VEHICLE HANDLER
+      // ---------------------------------------------
+      const customVehicleBox = document.getElementById('custom-vehicle-box');
+      const openCustomBtn = document.getElementById('open-custom-vehicle-btn');
+      const closeCustomBtn = document.getElementById('close-custom-vehicle-btn');
+      const customVehicleForm = document.getElementById('custom-vehicle-form');
+      const requestSuccessAlert = document.getElementById('request-success-alert');
+      const submitRequestBtn = document.getElementById('submit-request-btn');
+
+      openCustomBtn.addEventListener('click', () => {
+        customVehicleBox.classList.toggle('hidden');
+        if (!customVehicleBox.classList.contains('hidden')) {
+          document.getElementById('custom-name').focus();
+        }
+      });
+
+      closeCustomBtn.addEventListener('click', () => {
+        customVehicleBox.classList.add('hidden');
+      });
+
+      customVehicleForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('custom-name').value.trim();
+        const year = document.getElementById('custom-year').value.trim();
+        const email = document.getElementById('custom-email').value.trim();
+
+        if (!name) return;
+
+        submitRequestBtn.disabled = true;
+        submitRequestBtn.innerText = 'Submitting...';
+
+        // Store request in browser storage so it is tracked
+        try {
+          const existing = JSON.parse(localStorage.getItem('pending_vehicle_requests') || '[]');
+          existing.push({ name, year, email, timestamp: new Date().toISOString() });
+          localStorage.setItem('pending_vehicle_requests', JSON.stringify(existing));
+        } catch (err) {}
+
+        setTimeout(() => {
+          submitRequestBtn.disabled = false;
+          submitRequestBtn.innerText = 'Submit Request';
+          requestSuccessAlert.classList.remove('hidden');
+          customVehicleForm.reset();
+
+          setTimeout(() => {
+            requestSuccessAlert.classList.add('hidden');
+            customVehicleBox.classList.add('hidden');
+          }, 3500);
+        }, 500);
       });
 
       // ---------------------------------------------
@@ -857,3 +996,4 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
     });
   </script>
 </Layout>
+

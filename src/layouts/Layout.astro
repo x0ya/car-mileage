@@ -15,20 +15,46 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#171717" />
+    <link rel="canonical" href="https://realcarmileage.com" />
+
+    <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://realcarmileage.com" />
-    
-    <!-- Geist Font Preconnect & Styles -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://realcarmileage.com/web-app-manifest-512x512.png" />
+    <meta property="og:site_name" content="Real Car Mileage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Real Car Mileage",
+      "url": "https://realcarmileage.com",
+      "description": description,
+      "publisher": { "@type": "Organization", "name": "Real Car Mileage", "url": "https://realcarmileage.com" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://realcarmileage.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+    <!-- Geist Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- Anti-flicker Dark Mode Script -->
     <script is:inline>
@@ -43,20 +69,16 @@ const {
     </script>
   </head>
   <body class="bg-[#fafafa] dark:bg-[#09090b] text-[#171717] dark:text-[#f4f4f5] antialiased min-h-screen flex flex-col font-['Geist',-apple-system,BlinkMacSystemFont,sans-serif] selection:bg-[#171717] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-200">
-    <!-- Top announcement / status bar -->
-    <div class="border-b border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#0d0d0f] text-xs text-[#666] dark:text-[#a1a1aa] py-1.5 px-4 text-center transition-colors">
-      <span class="inline-flex items-center gap-1.5 font-mono text-[11px]">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>realcarmileage.com</span>
-        <span class="text-[#bbb] dark:text-[#3f3f46]">|</span>
-        <span class="text-[#171717] dark:text-[#fafafa] font-medium">Verified CarWale & BikeWale Road-Test Benchmarks</span>
-      </span>
-    </div>
+
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-3 focus:py-2 focus:rounded-md focus:bg-[#171717] focus:text-white focus:dark:bg-white focus:dark:text-[#171717]">Skip to content</a>
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-[#09090b]/80 border-b border-[#ebebeb] dark:border-[#27272a] transition-colors">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#09090b]/80 backdrop-blur-md border-b border-[#ebebeb] dark:border-[#27272a] transition-colors">
+      <!-- Top bar -->
       <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 group">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5 group shrink-0">
           <div class="w-8 h-8 rounded-lg bg-[#171717] dark:bg-[#fafafa] text-white dark:text-[#171717] flex items-center justify-center font-bold text-sm tracking-tighter group-hover:scale-105 transition-transform">
             RM
           </div>
@@ -66,13 +88,14 @@ const {
           </div>
         </a>
 
-        <!-- Quick method anchor links -->
+        <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-[#666] dark:text-[#a1a1aa]">
-          <a href="#tab-search" class="hover:text-[#171717] dark:hover:text-white transition-colors">1. Vehicle Database</a>
-          <a href="#tab-calc" class="hover:text-[#171717] dark:hover:text-white transition-colors">2. Fuel Calculator</a>
-          <a href="#tab-trip" class="hover:text-[#171717] dark:hover:text-white transition-colors">3. Trip Cost Planner</a>
+          <a href="#tab-search" class="hover:text-[#171717] dark:hover:text-white transition-colors">Vehicle Database</a>
+          <a href="#tab-calc" class="hover:text-[#171717] dark:hover:text-white transition-colors">Fuel Calculator</a>
+          <a href="#tab-trip" class="hover:text-[#171717] dark:hover:text-white transition-colors">Trip Planner</a>
         </nav>
 
+        <!-- Right side controls -->
         <div class="flex items-center gap-3">
           <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono bg-[#f4f4f5] dark:bg-[#18181b] border border-[#e4e4e7] dark:border-[#27272a] text-[#52525b] dark:text-[#a1a1aa]">
             <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
@@ -81,28 +104,46 @@ const {
             ARAI vs True Mileage
           </span>
 
-          <!-- Dark Mode Toggle Button (Vercel Style) -->
-          <button 
-            type="button" 
-            id="theme-toggle" 
-            aria-label="Toggle dark mode" 
-            class="w-8 h-8 rounded-lg border border-[#e4e4e7] dark:border-[#27272a] bg-white dark:bg-[#18181b] flex items-center justify-center text-[#52525b] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white hover:border-[#171717] dark:hover:border-white transition-all cursor-pointer shadow-xs"
+          <!-- Dark Mode Toggle -->
+          <button
+            type="button"
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            class="w-8 h-8 rounded-lg border border-[#e4e4e7] dark:border-[#27272a] bg-white dark:bg-[#18181b] flex items-center justify-center text-[#52525b] dark:text-[#a1a1aa] hover:text-[#171717] dark:hover:text-white hover:border-[#171717] dark:hover:border-white transition-all cursor-pointer"
           >
-            <!-- Sun Icon (shown in dark mode) -->
             <svg id="theme-toggle-light-icon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
-            <!-- Moon Icon (shown in light mode) -->
             <svg id="theme-toggle-dark-icon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           </button>
+
+          <!-- Mobile hamburger -->
+          <button id="nav-toggle" class="md:hidden text-[#666] dark:text-[#a1a1aa] focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" id="icon-open" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" id="icon-close" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
       </div>
+
+      <!-- Mobile dropdown (hidden by default, shown below header bar) -->
+      <nav
+        id="mobile-nav"
+        class="hidden md:hidden border-t border-[#ebebeb] dark:border-[#27272a] bg-white/95 dark:bg-[#09090b]/95 backdrop-blur-md px-4 py-3 flex-col gap-1"
+      >
+        <a href="#tab-search" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Vehicle Database</a>
+        <a href="#tab-calc"   class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Fuel Calculator</a>
+        <a href="#tab-trip"   class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Trip Planner</a>
+      </nav>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1">
+    <main id="main-content" class="flex-1 focus:outline-none">
       <slot />
     </main>
 
@@ -121,16 +162,20 @@ const {
 
         <div class="flex flex-col md:items-end gap-2 font-mono text-[11px]">
           <div>Domain: <span class="text-[#171717] dark:text-[#fafafa] font-medium">realcarmileage.com</span></div>
-          <div class="text-[#aaa] dark:text-[#52525b]">Engineered with Astro 5, Tailwind v4 & Geist System</div>
+          <div class="text-[#aaa] dark:text-[#52525b]">Engineered with Astro 7, Tailwind v4 & Geist System</div>
         </div>
       </div>
     </footer>
 
-    <!-- Dark Mode Toggle Script -->
+    <!-- Scripts -->
     <script is:inline>
       const themeToggleBtn = document.getElementById('theme-toggle');
-      const lightIcon = document.getElementById('theme-toggle-light-icon');
-      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const navToggleBtn   = document.getElementById('nav-toggle');
+      const mobileNav      = document.getElementById('mobile-nav');
+      const lightIcon      = document.getElementById('theme-toggle-light-icon');
+      const darkIcon       = document.getElementById('theme-toggle-dark-icon');
+      const iconOpen       = document.getElementById('icon-open');
+      const iconClose      = document.getElementById('icon-close');
 
       function syncThemeIcons() {
         if (document.documentElement.classList.contains('dark')) {
@@ -141,6 +186,31 @@ const {
           darkIcon.classList.remove('hidden');
         }
       }
+
+      function toggleMobileNav() {
+        const isOpen = !mobileNav.classList.contains('hidden');
+        if (isOpen) {
+          mobileNav.classList.add('hidden');
+          mobileNav.classList.remove('flex');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        } else {
+          mobileNav.classList.remove('hidden');
+          mobileNav.classList.add('flex');
+          iconOpen.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        }
+      }
+
+      // Close mobile nav when a link is clicked
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.add('hidden');
+          mobileNav.classList.remove('flex');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
 
       syncThemeIcons();
 
@@ -154,6 +224,8 @@ const {
         }
         syncThemeIcons();
       });
+
+      navToggleBtn.addEventListener('click', toggleMobileNav);
     </script>
   </body>
 </html>
