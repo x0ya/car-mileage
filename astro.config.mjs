@@ -6,7 +6,13 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://realcarmileage.com',
-  integrations: [sitemap()],
+  devToolbar: { enabled: false },
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !/\/(about-us|privacy|terms|contact-us)\/$/.test(page),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

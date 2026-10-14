@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
+# Block thin redirect/alias pages that already use noindex
+Disallow: /about-us/
+Disallow: /privacy/
+Disallow: /terms/
+Disallow: /contact-us/
+
 Sitemap: https://realcarmileage.com/sitemap-index.xml
+Sitemap: https://realcarmileage.com/sitemap-0.xml

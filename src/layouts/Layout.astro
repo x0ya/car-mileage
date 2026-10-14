@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -24,6 +26,7 @@ const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
@@ -85,6 +88,16 @@ const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
         document.documentElement.classList.remove('dark');
       }
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H4XK807LWD"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-H4XK807LWD');
+    </script>
   </head>
   <body class="bg-[#fafafa] dark:bg-[#09090b] text-[#171717] dark:text-[#f4f4f5] antialiased min-h-screen flex flex-col font-['Geist',-apple-system,BlinkMacSystemFont,sans-serif] selection:bg-[#171717] selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-200">
 
@@ -108,9 +121,13 @@ const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
 
         <!-- Desktop nav -->
         <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-[#666] dark:text-[#a1a1aa]">
-          <a href="#tab-search" class="hover:text-[#171717] dark:hover:text-white transition-colors">Vehicle Database</a>
-          <a href="#tab-calc" class="hover:text-[#171717] dark:hover:text-white transition-colors">Fuel Calculator</a>
-          <a href="#tab-trip" class="hover:text-[#171717] dark:hover:text-white transition-colors">Trip Planner</a>
+          <a href="#tab-search" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Vehicle Database</a>
+          <a href="#tab-calc" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Fuel Calculator</a>
+          <a href="#tab-trip" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Trip Planner</a>
+          <a href="/about" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">About</a>
+          <a href="/contact" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Contact</a>
+          <a href="/privacy-policy" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Privacy</a>
+          <a href="/terms-and-conditions" class="hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">Terms</a>
         </nav>
 
         <!-- Right side controls -->
@@ -157,6 +174,10 @@ const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
         <a href="#tab-search" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Vehicle Database</a>
         <a href="#tab-calc"   class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Fuel Calculator</a>
         <a href="#tab-trip"   class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Trip Planner</a>
+        <a href="/about"      class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">About</a>
+        <a href="/contact"    class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Contact</a>
+        <a href="/privacy-policy" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Privacy Policy</a>
+        <a href="/terms-and-conditions" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-[#444] dark:text-[#a1a1aa] hover:bg-[#f4f4f5] dark:hover:bg-[#18181b] hover:text-[#171717] dark:hover:text-white transition-all">Terms & Conditions</a>
       </nav>
     </header>
 
@@ -179,6 +200,12 @@ const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
         </div>
 
         <div class="flex flex-col md:items-end gap-2 font-mono text-[11px]">
+          <nav aria-label="Footer" class="flex flex-wrap gap-x-4 gap-y-2 text-[#444] dark:text-[#a1a1aa]">
+            <a href="/about" class="font-medium hover:text-[#171717] dark:hover:text-[#fafafa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm transition-colors">About</a>
+            <a href="/contact" class="font-medium hover:text-[#171717] dark:hover:text-[#fafafa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm transition-colors">Contact</a>
+            <a href="/privacy-policy" class="font-medium hover:text-[#171717] dark:hover:text-[#fafafa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm transition-colors">Privacy Policy</a>
+            <a href="/terms-and-conditions" class="font-medium hover:text-[#171717] dark:hover:text-[#fafafa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm transition-colors">Terms & Conditions</a>
+          </nav>
           <div>Domain: <span class="text-[#171717] dark:text-[#fafafa] font-medium">realcarmileage.com</span></div>
           <div class="text-[#aaa] dark:text-[#52525b]">Engineered with Astro 7, Tailwind v4 & Geist System</div>
         </div>

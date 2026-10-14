@@ -1,11 +1,90 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { VEHICLE_DATABASE, FUEL_PRICES_BY_STATE } from '../data/vehicles';
-import '../styles/global.css';
 
 const makes = Array.from(new Set(VEHICLE_DATABASE.map(v => v.make))).sort();
 const years = Array.from(new Set(VEHICLE_DATABASE.map(v => v.year))).sort((a,b) => b - a);
 const stateCities = Object.keys(FUEL_PRICES_BY_STATE);
+
+const faqs = [
+  {
+    q: "How to calculate mileage of car?",
+    a: "Reset your trip meter, fill the tank fully, drive normally, then refill again. Mileage = distance travelled (km) / fuel used (litres). For example, 500 km on 25 litres = 20 km/l. Our calculator converts the same result into km/l, US MPG, and L/100 km and also shows cost per km and total fuel cost."
+  },
+  {
+    q: "Which car gives highest mileage?",
+    a: "In our Indian vehicle database, small CNG cars lead: Maruti Suzuki Wagon R S-CNG is rated around 34 km/kg, followed by S-Presso S-CNG around 32.7 km/kg and Dzire S-CNG around 31.1 km/kg. Real city figures are usually lower than these claimed numbers, so compare both claimed and real-world estimates before buying."
+  },
+  {
+    q: "What is mileage in car?",
+    a: "Mileage, or fuel economy, is the distance a car can travel per unit of fuel. It is usually written as km/l for petrol, diesel and CNG or km/kWh for electric cars. A higher mileage means lower running cost, but actual mileage depends on traffic, driving style, tyre pressure, load and air-conditioning."
+  },
+  {
+    q: "How to calculate car mileage?",
+    a: "Use the tank-to-tank method: note the odometer or trip meter reading at a full tank, drive, then refill to the same level. Car mileage = kilometres driven / litres added. Keep at least 2-3 full tanks for a stable average and log the result separately for city and highway use."
+  },
+  {
+    q: "How to calculate mileage of a car?",
+    a: "Mileage of a car is calculated as distance divided by fuel volume: km / litres. You can also work backwards from fuel cost: total fuel cost / distance gives cost per km. Our calculator on this page performs both calculations automatically and supports metric and imperial units."
+  },
+  {
+    q: "What is the best car for high mileage?",
+    a: "For very high mileage, compact CNG cars are usually best in India, while efficient petrol hatchbacks and small diesel sedans are strong choices where CNG is unavailable. Prioritise real-world city mileage, service network, fuel prices in your city and your typical route rather than only the ARAI claim."
+  },
+  {
+    q: "How to check mileage of car?",
+    a: "Check mileage with a tank-to-tank fill or review the car's trip computer average. The trip computer is convenient but often optimistic; tank-to-tank is more accurate. Compare your result with our database's claimed, city and highway figures for the same make, model, variant and year."
+  },
+  {
+    q: "Which car gives more mileage?",
+    a: "CNG cars generally give the highest mileage in our database, followed by efficient petrol hatchbacks; larger SUVs, 4x4s and automatics usually consume more. If two cars have similar claimed mileage, prefer the one with better verified real-world city and highway numbers and lower fuel price in your region."
+  },
+  {
+    q: "Which diesel car has highest mileage?",
+    a: "Among the diesel cars in our database, the Hyundai i20 1.5 CRDi diesel (around 25.2 km/l claimed) and Honda Amaze 1.5 i-DTEC diesel (around 24.7 km/l claimed) are among the most efficient. Real-world diesel economy is typically 15-20% lower in mixed city traffic and better on highways."
+  },
+  {
+    q: "Which BMW car has highest mileage?",
+    a: "Our current database focuses on mass-market Indian brands and does not include BMW. BMWs are premium, performance-oriented models, so their headline mileage is usually below small economy cars. Compare exact BMW variant, engine, transmission and year figures, and use real-world road tests before deciding."
+  },
+  {
+    q: "Which car is best in mileage?",
+    a: "There is no single best car for everyone: CNG commuters give the highest km/kg, while some diesels offer strong highway economy. The best car is the one with high verified mileage plus affordable fuel, low maintenance and good resale value for your driving pattern."
+  },
+  {
+    q: "How to increase mileage of car?",
+    a: "Inflate tyres to the recommended cold pressure, accelerate smoothly, shift early in manual cars, avoid unnecessary idling, keep the air filter and spark plugs healthy, remove extra weight, service the engine regularly, plan trips to avoid repeated cold starts, and maintain a steady 70-90 km/h on highways."
+  },
+  {
+    q: "How to increase car mileage?",
+    a: "Improve car mileage by driving in the engine's efficient RPM band, using moderate air-conditioning, coasting to traffic lights instead of braking late, keeping wheels aligned, and using the vehicle manufacturer's specified engine oil. Poor mileage can also signal worn brake pads, dragging brakes or under-inflated tyres."
+  },
+  {
+    q: "Which car has the highest mileage?",
+    a: "The highest-mileage car in our database is the Maruti Suzuki Wagon R LXi S-CNG at about 34 km/kg claimed. Real-world figures are lower, especially in city traffic, so use our calculator and database to estimate your actual running cost before buying."
+  },
+  {
+    q: "Car ka mileage kaise nikale?",
+    a: "Car ka mileage nikalne ke liye trip meter reset karein, full tank fuel bharwayein, normal driving karein, phir dobara full tank bharwayein. Mileage = kitne km chale / kitne litre fuel laga. Iske result ko city aur highway ke alag average ke liye note karein."
+  },
+  {
+    q: "Which car have highest mileage?",
+    a: "The most mileage-efficient cars in our Indian database are CNG models such as Wagon R S-CNG, S-Presso S-CNG and Dzire S-CNG. For petrol or diesel, efficient hatchbacks and compact sedans perform best. Always verify the exact variant because engine and transmission change the figure significantly."
+  },
+  {
+    q: "Which bike has highest mileage?",
+    a: "In our bike database, the Bajaj Freedom 125 CNG motorcycle leads at about 102 km/kg, while efficient petrol commuters such as Hero Splendor Plus and HF Deluxe are rated around 65-73 km/l. Actual two-wheeler mileage varies with engine temperature, traffic, tyre pressure and riding style."
+  },
+  {
+    q: "How to calculate mileage of bike?",
+    a: "Calculate bike mileage the same way as a car: distance travelled divided by fuel consumed. Reset the trip meter, fill the tank, ride normally, then refill and divide kilometres by litres. For CNG bikes, divide kilometres by kg of gas instead of litres."
+  },
+  {
+    q: "Which bike is best for mileage?",
+    a: "For best mileage, choose a small commuter bike or scooter with a 100-125cc engine, or a CNG motorcycle where refuelling is available. Heavier, higher-power bikes give less mileage. Compare claimed and real-world city figures and remember that smooth throttle use is more important than brochure numbers."
+  }
+];
+
 ---
 
 <Layout title="Car Mileage Bike Mileage | Real-World Fuel Economy & Trip Cost Calculator" description="Track car mileage and bike mileage with claimed vs real-world city/highway estimates for Fronx, Ertiga, Swift, Baleno, Brezza, Jimny and more. Use the car mileage calculator, bike mileage calculator, and trip fuel cost planner in ₹.">
@@ -588,6 +667,49 @@ const stateCities = Object.keys(FUEL_PRICES_BY_STATE);
       </div>
     </div>
   </section>
+
+  <!-- SEO-friendly FAQ section -->
+  <section class="max-w-5xl mx-auto px-4 pb-20 pt-16 border-t border-[#ebebeb] dark:border-[#27272a] transition-colors" aria-labelledby="faq-heading">
+    <div class="max-w-3xl">
+      <span class="font-mono text-xs uppercase text-[#888] dark:text-[#71717a] tracking-wider">Frequently Asked Questions</span>
+      <h2 id="faq-heading" class="text-2xl sm:text-3xl font-bold text-[#171717] dark:text-white tracking-tight mt-2">
+        Car and bike mileage questions answered
+      </h2>
+      <p class="text-sm sm:text-base text-[#666] dark:text-[#a1a1aa] mt-2 leading-relaxed">
+        Quick answers to the most searched car mileage and bike mileage questions, with the same real-world logic used by our calculators and vehicle database.
+      </p>
+    </div>
+
+    <div class="mt-8 max-w-3xl space-y-3">
+      {faqs.map((faq) => (
+        <details class="group rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215] transition-colors">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm sm:text-base font-semibold text-[#171717] dark:text-white">
+            <span>{faq.q}</span>
+            <svg class="w-4 h-4 shrink-0 text-[#888] dark:text-[#71717a] transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-5 pb-4 text-sm text-[#555] dark:text-[#a1a1aa] leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ structured data for SEO (JSON-LD) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  })} />
 
   <!-- Pass vehicle database to client-side script -->
   <script is:inline define:vars={{ FUEL_PRICES_BY_STATE }}>

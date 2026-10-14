@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "About Real Car Mileage | Car Mileage and Bike Mileage Database";
+const description = "Real Car Mileage helps Indian drivers compare claimed and real-world car mileage and bike mileage, calculate fuel economy, and plan trip costs.";
+const keywords = "about real car mileage, car mileage database, bike mileage database, fuel economy India, trip cost calculator";
+---
+
+<Layout title={title} description={description} keywords={keywords}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <div class="rounded-2xl border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215] shadow-sm p-6 sm:p-8 transition-colors">
+      <a href="/" class="text-xs text-[#888] dark:text-[#71717a] hover:text-[#171717] dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171717] dark:focus-visible:ring-white rounded-sm">← Back to home</a>
+
+    <div class="mt-6 font-mono text-xs uppercase tracking-wider text-[#888] dark:text-[#71717a] text-pretty">About us</div>
+    <h1 class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-[#171717] dark:text-white text-balance">About Real Car Mileage</h1>
+    <p class="mt-4 text-base text-[#444] dark:text-[#d4d4d8] leading-relaxed">
+      Real Car Mileage is an independent automotive reference for Indian car and motorcycle owners. The site brings together manufacturer claimed mileage, realistic city and highway estimates, a car and bike mileage calculator, and a trip fuel cost planner in one place.
+    </p>
+
+    <h2 class="mt-8 text-xl font-semibold text-[#171717] dark:text-white text-balance scroll-mt-24">What we do</h2>
+    <ul class="mt-3 space-y-2 text-sm text-[#444] dark:text-[#d4d4d8] leading-relaxed list-disc pl-5">
+      <li>Compare claimed and real-world mileage by make, model, variant, fuel type, transmission and model year.</li>
+      <li>Calculate your own fuel economy from distance travelled and fuel refilled.</li>
+      <li>Estimate trip fuel consumption, trip cost, cost per kilometre and per-passenger sharing.</li>
+      <li>Highlight the gap between laboratory test figures and everyday Indian driving conditions.</li>
+    </ul>
+
+    <h2 class="mt-8 text-xl font-semibold text-[#171717] dark:text-white text-balance scroll-mt-24">Our approach</h2>
+    <p class="mt-3 text-sm text-[#444] dark:text-[#d4d4d8] leading-relaxed">
+      Mileage is not a single number. Traffic density, weather, vehicle load, tyre pressure, fuel quality, riding or driving style and air-conditioning all change the result. We therefore present claimed, city and highway figures side by side and encourage owners to measure their own tank-to-tank average.
+    </p>
+    <p class="mt-3 text-sm text-[#444] dark:text-[#d4d4d8] leading-relaxed">
+      Our database focuses on popular Indian-market cars and motorcycles. Where a variant is missing, owners can request it through the request form so the database can be expanded over time.
+    </p>
+
+    <h2 class="mt-8 text-xl font-semibold text-[#171717] dark:text-white text-balance scroll-mt-24">Who this helps</h2>
+    <p class="mt-3 text-sm text-[#444] dark:text-[#d4d4d8] leading-relaxed">
+      Buyers comparing vehicles, commuters budgeting monthly fuel, riders planning long trips and owners diagnosing unexpected consumption all get more value from realistic mileage than from a brochure figure alone.
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="/" class="px-4 py-2.5 rounded-lg text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-black dark:hover:bg-zinc-200 transition-all">Use the mileage tools</a>
+      <a href="/contact" class="px-4 py-2.5 rounded-lg text-sm font-medium border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-white hover:border-[#171717] dark:hover:border-white transition-all">Contact us</a>
+    </div>
+    </div>
+  </article>
+</Layout>
