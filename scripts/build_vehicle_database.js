@@ -951,3 +951,8 @@ const targetPath = path.resolve(__dirname, '../src/data/all_vehicles.json');
 fs.mkdirSync(path.dirname(targetPath), { recursive: true });
 fs.writeFileSync(targetPath, JSON.stringify(allRecords, null, 2), 'utf-8');
 console.log(`Generated ${allRecords.length} vehicles into ${targetPath}`);
+
+const publicDataDir = path.resolve(__dirname, '../public/data');
+fs.mkdirSync(publicDataDir, { recursive: true });
+fs.writeFileSync(path.join(publicDataDir, 'vehicles.json'), JSON.stringify(allRecords), 'utf-8');
+console.log(`Generated ${allRecords.length} vehicles into ${path.join(publicDataDir, 'vehicles.json')}`);

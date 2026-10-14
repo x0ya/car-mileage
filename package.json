@@ -6,13 +6,15 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run generate:data && astro dev",
+    "prebuild": "npm run generate:data",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate:data": "node scripts/build_vehicle_database.js",
     "check": "astro check",
-    "lint": "eslint src scripts"
+    "lint": "eslint src scripts",
+    "test": "npm run generate:data && node scripts/validate_data.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

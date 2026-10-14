@@ -1,0 +1,95 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { VEHICLE_DATABASE } from '../../data/vehicles';
+
+export function getStaticPaths() {
+  return VEHICLE_DATABASE.map((vehicle) => ({
+    params: { id: vehicle.id },
+    props: { vehicle },
+  }));
+}
+
+const { vehicle } = Astro.props;
+
+const cityVariance = Math.round(((vehicle.realWorldCity - vehicle.claimedMileage) / vehicle.claimedMileage) * 100);
+const hwyVariance = Math.round(((vehicle.realWorldHighway - vehicle.claimedMileage) / vehicle.claimedMileage) * 100);
+const cityShare = Math.min(100, Math.round((vehicle.realWorldCity / vehicle.claimedMileage) * 100));
+const gapShare = 100 - cityShare;
+
+const kind = vehicle.type === 'car' ? 'Car' : 'Bike';
+const title = `${vehicle.make} ${vehicle.model} ${vehicle.variant} ${kind} Mileage - Claimed vs Real-World ${kind} Mileage`;
+const description = `${vehicle.make} ${vehicle.model} ${vehicle.variant} ${kind.toLowerCase()} mileage: ARAI claimed ${vehicle.claimedMileage} ${vehicle.unit}, real-world city ${vehicle.realWorldCity} ${vehicle.unit}, highway ${vehicle.realWorldHighway} ${vehicle.unit}. Compare car mileage and bike mileage to plan fuel costs.`;
+const keywords = `${vehicle.make} ${vehicle.model} mileage, ${vehicle.make} ${vehicle.model} ${vehicle.fuelType.toLowerCase()} mileage, claimed vs real-world ${kind.toLowerCase()} mileage, car mileage bike mileage`;
+---
+
+<Layout title={title} description={description} keywords={keywords} ogType="article">
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <a href="/" class="text-xs text-[#888] dark:text-[#71717a] hover:text-[#171717] dark:hover:text-white transition-colors">← Back to mileage tools</a>
+
+    <div class="mt-6 inline-flex items-center gap-2 mb-2">
+      <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#f4f4f5] dark:bg-[#18181b] text-[#555] dark:text-[#a1a1aa] font-semibold border border-[#e4e4e7] dark:border-[#27272a]">{vehicle.type}</span>
+      <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-900">{vehicle.fuelType}</span>
+      <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold">{vehicle.transmission}</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#171717] dark:text-white">
+      {vehicle.make} {vehicle.model} {vehicle.variant}
+    </h1>
+    <p class="mt-2 text-sm text-[#666] dark:text-[#a1a1aa]">
+      Engine: {vehicle.engineCc || 'N/A'} cc · Tank: {vehicle.tankCapacity} {vehicle.fuelType === 'CNG' ? 'kg' : vehicle.fuelType === 'Electric' ? 'kWh' : 'L'} · Model year: {vehicle.year}
+    </p>
+
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="p-5 rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-[#fafafa] dark:bg-[#18181b]">
+        <div class="text-xs text-[#666] dark:text-[#a1a1aa] font-mono">ARAI claimed</div>
+        <div class="mt-2 text-3xl font-extrabold text-[#171717] dark:text-white">{vehicle.claimedMileage.toFixed(1)}</div>
+        <div class="text-xs font-mono text-[#888]">{vehicle.unit}</div>
+      </div>
+      <div class="p-5 rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215]">
+        <div class="text-xs text-[#666] dark:text-[#a1a1aa] font-mono">Real-world city</div>
+        <div class="mt-2 text-3xl font-extrabold text-amber-600 dark:text-amber-400">{vehicle.realWorldCity.toFixed(1)}</div>
+        <div class="text-xs font-mono text-[#888]">{vehicle.unit} ({cityVariance}%)</div>
+      </div>
+      <div class="p-5 rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215]">
+        <div class="text-xs text-[#666] dark:text-[#a1a1aa] font-mono">Real-world highway</div>
+        <div class="mt-2 text-3xl font-extrabold text-blue-600 dark:text-blue-400">{vehicle.realWorldHighway.toFixed(1)}</div>
+        <div class="text-xs font-mono text-[#888]">{vehicle.unit} ({hwyVariance > 0 ? '+' : ''}{hwyVariance}%)</div>
+      </div>
+    </div>
+
+    <div class="mt-6 p-4 rounded-xl border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215]">
+      <div class="flex items-center justify-between text-xs mb-2">
+        <span class="font-medium text-[#171717] dark:text-white">Claimed vs reality gap (city)</span>
+        <span class="font-mono text-xs text-rose-600 dark:text-rose-400 font-semibold">{gapShare}% lower in daily driving</span>
+      </div>
+      <div class="w-full bg-[#f4f4f5] dark:bg-[#27272a] h-3 rounded-full overflow-hidden flex">
+        <div class="bg-amber-400 dark:bg-amber-500 h-full" style={`width: ${cityShare}%;`}></div>
+        <div class="bg-zinc-200 dark:bg-zinc-700 h-full" style={`width: ${gapShare}%;`}></div>
+      </div>
+      <div class="flex items-center justify-between text-[11px] font-mono text-[#888] dark:text-[#71717a] mt-2">
+        <span>0 {vehicle.unit}</span>
+        <span>Max claim: {vehicle.claimedMileage} {vehicle.unit}</span>
+      </div>
+    </div>
+
+    <p class="mt-6 text-xs text-[#666] dark:text-[#a1a1aa] leading-relaxed">
+      Figures are model/variant-level estimates curated for India. Real-world mileage varies with traffic, driving style, fuel quality, tyre pressure and climate control. Use the fuel calculator and trip planner below for your exact vehicle.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/#tab-calc" class="px-4 py-2.5 rounded-lg text-sm font-medium bg-[#171717] dark:bg-white text-white dark:text-[#171717] hover:bg-black dark:hover:bg-zinc-200 transition-all">Calculate My Mileage</a>
+      <a href="/#tab-trip" class="px-4 py-2.5 rounded-lg text-sm font-medium border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-white hover:border-[#171717] dark:hover:border-white transition-all">Trip Fuel & Cost Planner</a>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": vehicle.type === 'car' ? 'Car' : 'Motorcycle',
+      "name": `${vehicle.make} ${vehicle.model} ${vehicle.variant}`,
+      "brand": { "@type": "Brand", "name": vehicle.make },
+      "model": vehicle.model,
+      "productionDate": String(vehicle.year),
+      "url": new URL(`/vehicles/${vehicle.id}`, Astro.site).toString(),
+      "description": description
+    })} />
+  </article>
+</Layout>

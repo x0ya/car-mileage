@@ -6,12 +6,9 @@ import '../styles/global.css';
 const makes = Array.from(new Set(VEHICLE_DATABASE.map(v => v.make))).sort();
 const years = Array.from(new Set(VEHICLE_DATABASE.map(v => v.year))).sort((a,b) => b - a);
 const stateCities = Object.keys(FUEL_PRICES_BY_STATE);
-const totalVehiclesCount = VEHICLE_DATABASE.length;
-const totalCarsCount = VEHICLE_DATABASE.filter(v => v.type === 'car').length;
-const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
 ---
 
-<Layout>
+<Layout title="Car Mileage Bike Mileage | Real-World Fuel Economy & Trip Cost Calculator" description="Track car mileage and bike mileage with claimed vs real-world city/highway estimates for Fronx, Ertiga, Swift, Baleno, Brezza, Jimny and more. Use the car mileage calculator, bike mileage calculator, and trip fuel cost planner in ₹.">
   <!-- Hero Section with subtle Vercel-like mesh glow (dark & light adapted) -->
   <section class="relative overflow-hidden pt-12 pb-16 border-b border-[#ebebeb] dark:border-[#27272a] bg-gradient-to-b from-white dark:from-[#0d0d0f] to-[#fafafa] dark:to-[#09090b] transition-colors">
     <!-- Ambient mesh gradient accent -->
@@ -24,11 +21,11 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       </div>
       
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#171717] dark:text-white max-w-3xl mx-auto leading-[1.08]">
-        Don't trust ARAI claims blindly. Check <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#171717] dark:from-white via-[#444] dark:via-[#d4d4d8] to-[#888] dark:to-[#71717a]">Real Mileage.</span>
+        Car Mileage Bike Mileage: Don't trust ARAI claims blindly. Check <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#171717] dark:from-white via-[#444] dark:via-[#d4d4d8] to-[#888] dark:to-[#71717a]">Real Mileage.</span>
       </h1>
       
       <p class="mt-4 text-base sm:text-lg text-[#666] dark:text-[#a1a1aa] max-w-2xl mx-auto leading-relaxed">
-        Compare manufacturer claimed km/l against real-world city & highway road tests, measure exact fuel consumed, and compute true trip costs in ₹.
+        Compare manufacturer claimed km/l against real-world city & highway road tests, measure exact fuel consumed, and use the car mileage calculator and bike mileage calculator to compute true trip costs in ₹.
       </p>
 
       <!-- Mode Selector Pills (Vercel Tabs) -->
@@ -103,6 +100,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
           <div>
             <label for="filter-year" class="block text-xs font-medium text-[#444] dark:text-[#d4d4d8] mb-1.5">Model Year</label>
             <select id="filter-year" class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all">
+              <option value="">All Years</option>
               {years.map(y => <option value={y}>{y}</option>)}
             </select>
           </div>
@@ -183,6 +181,12 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
               </svg>
               Calculate Trip Cost with this Mileage
             </button>
+            <a id="view-vehicle-details" href="/vehicles" class="px-4 py-2.5 rounded-lg text-xs font-medium border border-[#ebebeb] dark:border-[#27272a] bg-white dark:bg-[#121215] text-[#171717] dark:text-white hover:border-[#171717] dark:hover:border-white transition-all flex items-center gap-1.5 self-start md:self-auto shadow-xs">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              View Vehicle Page
+            </a>
           </div>
 
           <!-- Comparison Cards Grid -->
@@ -252,7 +256,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
             </svg>
           </div>
           <h4 class="text-sm font-semibold text-[#171717] dark:text-white">No Vehicle Selected</h4>
-          <p class="text-xs text-[#888] dark:text-[#71717a] mt-1 max-w-sm mx-auto">Choose a brand and model above to view ARAI claimed figures alongside independently tested CarWale & BikeWale real-world highway and city mileage.</p>
+          <p class="text-xs text-[#888] dark:text-[#71717a] mt-1 max-w-sm mx-auto">Choose a brand and model above to view ARAI claimed figures alongside curated real-world city and highway mileage estimates for Indian driving conditions.</p>
         </div>
       </div>
     </div>
@@ -390,6 +394,19 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mt-6">
           <!-- Inputs Column -->
           <div class="md:col-span-7 space-y-5">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="trip-fuel-type" class="text-xs font-medium text-[#333] dark:text-[#d4d4d8]">Fuel Type</label>
+                <span class="text-[11px] text-[#888] dark:text-[#71717a]">Drives unit prices</span>
+              </div>
+              <select id="trip-fuel-type" class="w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-white dark:bg-[#18181b] text-[#171717] dark:text-[#fafafa] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all">
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
+                <option value="Electric">Electric</option>
+              </select>
+            </div>
+
             <div>
               <div class="flex items-center justify-between mb-1.5">
                 <label for="trip-distance" class="text-xs font-medium text-[#333] dark:text-[#d4d4d8]">Total Trip Distance</label>
@@ -542,16 +559,45 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
     </div>
   </section>
 
+  <!-- SEO content -->
+  <section class="max-w-5xl mx-auto px-4 pb-20 pt-16 border-t border-[#ebebeb] dark:border-[#27272a] transition-colors">
+    <div class="max-w-3xl">
+      <span class="font-mono text-xs uppercase text-[#888] dark:text-[#71717a] tracking-wider">Car Mileage Bike Mileage Guide</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#171717] dark:text-white tracking-tight mt-2">
+        Compare Car Mileage and Bike Mileage Before You Buy or Drive
+      </h2>
+      <div class="mt-6 space-y-4 text-sm sm:text-base text-[#444] dark:text-[#d4d4d8] leading-relaxed">
+        <p>
+          Real Car Mileage helps you find trustworthy car mileage and bike mileage figures without relying on ideal laboratory numbers alone. Every shopper should know the difference between an ARAI claim and the fuel average a vehicle delivers on Indian city roads, ring roads, and expressways. This tool brings those two figures side by side, then lets you calculate your own result with distance, fuel, and fuel price inputs. Whether you are choosing between a petrol hatchback, a diesel SUV, a CNG sedan, or a commuter motorcycle, accurate mileage data is one of the most practical ways to control running cost and plan fuel budgets for the year ahead.
+        </p>
+        <p>
+          Searching for car mileage by model is faster when the data is organised by manufacturer, model, variant, and model year. You can narrow the database to cars or bikes, then compare claimed km/l with independently styled real-world city and highway estimates. Popular ownership choices such as the <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-fronx-delta-1-2-dualjet-mt-manual-2023">Fronx car mileage</a> comparison, <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-ertiga-zxi-1-5-smart-hybrid-mt-manual-2022">Ertiga car mileage</a> figures, <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-swift-z-series-1-2-mt-new-gen-manual-2024">Swift car mileage</a>, <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-baleno-delta-1-2-dualjet-mt-manual-2022">Baleno car mileage</a>, <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-brezza-zxi-1-5-mt-smart-hybrid-manual-2022">Brezza car mileage</a>, and <a class="text-[#0070f3] hover:underline" href="/vehicles/maruti-suzuki-jimny-alpha-1-5-k15b-5mt-allgrip-pro-4x4-manual-2023">Jimny car mileage</a> all show how much claimed figures can change in stop-and-go traffic. Diesel and turbo petrol variants, mild hybrids, automatics, and S-CNG trims each behave differently, so variant-level comparisons matter more than a single headline number.
+        </p>
+        <p>
+          Two-wheeler owners can use the same approach for bike mileage before a purchase or after a service. Mileage changes with engine temperature, clutch use, tyre pressure, and traffic density, which is why real-world bike mileage estimates are useful alongside brochure claims. This guide also covers keywords such as <a class="text-[#0070f3] hover:underline" href="/vehicles/bajaj-freedom-125-world-first-cng-motorcycle-ng04-disc-led-manual-2024">bajaj cng bike mileage</a>, <a class="text-[#0070f3] hover:underline" href="/#tab-search">ronin bike mileage</a>, <a class="text-[#0070f3] hover:underline" href="/#tab-search">platina bike mileage</a>, <a class="text-[#0070f3] hover:underline" href="/#tab-search">unicorn bike mileage</a>, <a class="text-[#0070f3] hover:underline" href="/vehicles/royal-enfield-hunter-350-metro-dapper-dual-tone-manual-2022">hunter bike mileage</a>, and <a class="text-[#0070f3] hover:underline" href="/vehicles/hero-motocorp-splendor-plus-xtec-2-0-led-drum-manual-2024">splendor bike mileage</a> so riders researching commuter, cruiser, touring, or performance motorcycles can quickly land on relevant categories and then fine tune by make, engine size, and year. A carefully maintained Bajaj Freedom CNG motorcycle, Royal Enfield Hunter 350, or Hero Splendor Plus may all return very different efficiencies, and seeing them in the same framework makes the trade-offs easier to judge.
+        </p>
+        <p>
+          The site is more than a reference table. The car mileage calculator accepts distance and fuel volume and instantly returns efficiency in km/l, MPG, and L/100 km, plus cost per kilometre and total fuel cost. The bike mileage calculator works the same way and is useful after a tank-to-tank refill because you can reset the trip meter, drive normally, and convert the next refill into a true average. If you switch between metric and imperial units, all values update together, making the tool handy for owners who compare old manuals, importer specs, or international reviews. Presets for long-highway, city-commute, and bike-run scenarios let you test common use cases in one click.
+        </p>
+        <p>
+          After you know the average mileage, the trip planner estimates fuel required, total cost, cost per kilometre, passengers to split expenses, and whether the journey needs less than one full tank or multiple refills. For city riders this is useful for daily office runs and weekend getaways; for car owners it helps budget toll roads, family trips, and shared travel. Together the database, calculator, and planner create a complete car mileage bike mileage workflow: search a vehicle, compare claimed and real-world numbers, measure your own result, and convert that number into a rupee cost before you leave home.
+        </p>
+        <p>
+          If your exact variant is missing, submit it through the request form so the editorial database can be expanded. Browse the growing list of vehicle detail pages for model-specific information, or return to the calculator and trip planner to test your own driving pattern. Accurate fuel economy is not just a marketing statistic: it is the number that drives monthly running cost, route planning, and long term ownership decisions.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pass vehicle database to client-side script -->
-  <script is:inline define:vars={{ VEHICLE_DATABASE, FUEL_PRICES_BY_STATE }}>
-    window.__VEHICLES__ = VEHICLE_DATABASE;
+  <script is:inline define:vars={{ FUEL_PRICES_BY_STATE }}>
     window.__FUEL_PRICES__ = FUEL_PRICES_BY_STATE;
   </script>
 
   <!-- Client-side Logic Script -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-      const vehicles = window.__VEHICLES__ || [];
+      let vehicles = [];
       const fuelPrices = window.__FUEL_PRICES__ || {};
 
       // ---------------------------------------------
@@ -633,8 +679,10 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       const emptyState = document.getElementById('vehicle-empty-state');
 
       function getFilteredVehicles() {
+        const selectedYear = yearSelect ? yearSelect.value : '';
         return vehicles.filter(v => {
           if (currentTypeFilter !== 'all' && v.type !== currentTypeFilter) return false;
+          if (selectedYear && String(v.year) !== String(selectedYear)) return false;
           return true;
         });
       }
@@ -644,7 +692,8 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         const makes = Array.from(new Set(filtered.map(v => v.make))).sort();
         makeSelect.innerHTML = '<option value="">Select Manufacturer</option>' + 
           makes.map(m => `<option value="${m}">${m}</option>`).join('');
-        
+        makeSelect.value = '';
+
         modelSelect.innerHTML = '<option value="">Select Make first</option>';
         modelSelect.disabled = true;
         modelSelect.className = 'w-full px-3 py-2.5 text-xs sm:text-sm rounded-lg border border-[#d4d4d8] dark:border-[#27272a] bg-[#f4f4f5] dark:bg-[#18181b] text-[#888] dark:text-[#52525b] focus:outline-none focus:ring-2 focus:ring-[#171717] dark:focus:ring-white transition-all disabled:cursor-not-allowed';
@@ -669,6 +718,10 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
           populateMakes();
         });
       });
+
+      if (yearSelect) {
+        yearSelect.addEventListener('change', populateMakes);
+      }
 
       makeSelect.addEventListener('change', () => {
         const make = makeSelect.value;
@@ -758,6 +811,12 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
 
         emptyState.classList.add('hidden');
         resultCard.classList.remove('hidden');
+
+        const detailsLink = document.getElementById('view-vehicle-details');
+        if (detailsLink && selectedVehicle) {
+          detailsLink.href = `/vehicles/${encodeURIComponent(selectedVehicle.id)}`;
+          detailsLink.classList.remove('hidden', 'pointer-events-none', 'opacity-50');
+        }
       });
 
       // Quick transfer to Trip Planner
@@ -765,6 +824,9 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         if (!selectedVehicle) return;
         const avgMileage = Number(((selectedVehicle.realWorldCity + selectedVehicle.realWorldHighway) / 2).toFixed(1));
         document.getElementById('trip-mileage').value = avgMileage;
+        if (tripFuelTypeSelect) {
+          tripFuelTypeSelect.value = selectedVehicle.fuelType;
+        }
         switchTab('tab-trip');
         calculateTrip();
       });
@@ -914,6 +976,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
       const tripDistInput = document.getElementById('trip-distance');
       const tripMileageInput = document.getElementById('trip-mileage');
       const tripPriceInput = document.getElementById('trip-fuel-price');
+      const tripFuelTypeSelect = document.getElementById('trip-fuel-type');
       const roundTripToggle = document.getElementById('trip-roundtrip-toggle');
       const passengerSlider = document.getElementById('trip-passengers');
       const passengerCountLabel = document.getElementById('trip-passenger-count');
@@ -925,6 +988,8 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         const mileage = parseFloat(tripMileageInput.value) || 0;
         const price = parseFloat(tripPriceInput.value) || 0;
         const passengers = parseInt(passengerSlider.value) || 1;
+        const fuelType = tripFuelTypeSelect ? tripFuelTypeSelect.value : 'Petrol';
+        const fuelUnit = fuelType === 'Electric' ? 'kWh' : (fuelType === 'CNG' ? 'kg' : 'L');
 
         if (roundTripToggle.checked) {
           dist = dist * 2;
@@ -938,7 +1003,7 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         const costPerPassenger = totalTripCost / passengers;
 
         document.getElementById('out-trip-total-cost').innerText = Math.round(totalTripCost).toLocaleString('en-IN');
-        document.getElementById('out-trip-fuel-litres').innerText = `${fuelRequired.toFixed(2)} L`;
+        document.getElementById('out-trip-fuel-litres').innerText = `${fuelRequired.toFixed(2)} ${fuelUnit}`;
         document.getElementById('out-trip-cost-per-km').innerText = `₹${costPerKm.toFixed(2)}`;
         document.getElementById('out-trip-total-dist').innerText = `${dist} km`;
 
@@ -954,22 +1019,48 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         }
       }
 
-      [tripDistInput, tripMileageInput, tripPriceInput, roundTripToggle, passengerSlider].forEach(el => {
-        el.addEventListener('input', calculateTrip);
+      [tripDistInput, tripMileageInput, tripPriceInput, roundTripToggle, passengerSlider, tripFuelTypeSelect].forEach(el => {
+        if (el) el.addEventListener('input', calculateTrip);
       });
+      if (tripFuelTypeSelect) {
+        tripFuelTypeSelect.addEventListener('change', () => {
+          const defaults = { Petrol: 94.72, Diesel: 87.62, CNG: 79.50, Electric: 8.0 };
+          tripPriceInput.value = defaults[tripFuelTypeSelect.value] ?? tripPriceInput.value;
+          calculateTrip();
+        });
+      }
 
       // Region fuel presets
       document.querySelectorAll('.state-pill').forEach(pill => {
         pill.addEventListener('click', () => {
           const state = pill.getAttribute('data-state');
           if (fuelPrices[state]) {
-            tripPriceInput.value = fuelPrices[state].petrol;
+            const type = tripFuelTypeSelect ? tripFuelTypeSelect.value : 'Petrol';
+            const key = type === 'Petrol' ? 'petrol' : (type === 'Diesel' ? 'diesel' : (type === 'CNG' ? 'cng' : 'electricity'));
+            tripPriceInput.value = fuelPrices[state][key] ?? fuelPrices[state].petrol;
             calculateTrip();
           }
         });
       });
 
       // Copy trip summary
+      const fallbackCopy = (text) => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (err) {
+          return false;
+        }
+      };
+
       document.getElementById('copy-trip-btn').addEventListener('click', () => {
         const dist = document.getElementById('out-trip-total-dist').innerText;
         const cost = document.getElementById('out-trip-total-cost').innerText;
@@ -977,22 +1068,42 @@ const totalBikesCount = VEHICLE_DATABASE.filter(v => v.type === 'bike').length;
         const perKm = document.getElementById('out-trip-cost-per-km').innerText;
 
         const summary = `🚗 Real Car Mileage Trip Plan\nDistance: ${dist}\nFuel Required: ${fuel}\nTotal Fuel Cost: ₹${cost} (${perKm}/km)\nCalculated on realcarmileage.com`;
-        navigator.clipboard.writeText(summary).then(() => {
-          const btn = document.getElementById('copy-trip-btn');
-          const original = btn.innerHTML;
+        const btn = document.getElementById('copy-trip-btn');
+        const original = btn.innerHTML;
+        const showCopied = () => {
           btn.innerHTML = '✓ Copied to Clipboard!';
           btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
           setTimeout(() => {
             btn.innerHTML = original;
             btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
           }, 2000);
-        });
+        };
+        const showError = () => {
+          btn.innerHTML = 'Copy failed — select manually';
+          setTimeout(() => { btn.innerHTML = original; }, 2000);
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(summary).then(showCopied).catch(() => {
+            fallbackCopy(summary) ? showCopied() : showError();
+          });
+        } else {
+          fallbackCopy(summary) ? showCopied() : showError();
+        }
       });
 
-      // Initial runs
-      populateMakes();
-      calculateMileage();
-      calculateTrip();
+      // Load the (possibly large) vehicle catalogue on demand
+      (async () => {
+        try {
+          const response = await fetch('/data/vehicles.json');
+          if (response.ok) vehicles = await response.json();
+        } catch (err) {
+          vehicles = [];
+        }
+        populateMakes();
+        calculateMileage();
+        calculateTrip();
+      })();
     });
   </script>
 </Layout>

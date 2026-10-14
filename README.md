@@ -1,46 +1,30 @@
-# Astro Starter Kit: Basics
+# Real Car Mileage
 
-```sh
-npm create astro@latest -- --template basics
-```
+Static Astro site comparing ARAI claimed mileage with curated real-world city/highway mileage estimates for Indian cars and bikes, plus a fuel-efficiency calculator and trip cost planner.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+Run from the project root:
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command | Action |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Regenerate vehicle data, then start the dev server at `localhost:4321` |
+| `npm run build` | Regenerate vehicle data, then build the production site to `./dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run check` | TypeScript/Astro type checking |
+| `npm run generate:data` | Rebuild `src/data/all_vehicles.json` and `public/data/vehicles.json` from `scripts/build_vehicle_database.js` |
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## Project structure
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- `src/pages` — pages, including dynamically generated `/vehicles/[id]` detail pages
+- `src/layouts` — shared HTML shell, navigation, theme toggle
+- `src/data/vehicles.ts` — typed vehicle/fuel-price data helpers
+- `src/styles/global.css` — Tailwind v4 entry point and theme tokens
+- `scripts/build_vehicle_database.js` — source catalog and database generator
+- `public` — favicons, manifest, and generated runtime vehicle data
 
-## 🧞 Commands
+## Notes
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Vehicle mileage is a catalogued estimate; real-world results vary by driving style, fuel quality, tyres, and climate use.
+- Run `npm run generate:data` after editing the vehicle catalog in `scripts/build_vehicle_database.js`.

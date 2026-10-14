@@ -2,12 +2,21 @@
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
+  robots?: string;
+  ogType?: string;
 }
 
 const {
-  title = "Real Car Mileage — Claimed vs Real-World Fuel Economy & Trip Cost Calculator",
-  description = "Search claimed vs real-world mileage (km/l) for popular Indian cars and bikes from CarWale & BikeWale tests, calculate actual fuel efficiency, and estimate exact trip costs in ₹."
+  title = "Car Mileage Bike Mileage | Real-World Fuel Economy & Trip Cost Calculator",
+  description = "Track car mileage and bike mileage with claimed vs real-world city/highway estimates for Fronx, Ertiga, Swift, Baleno, Brezza, Jimny and more. Use the car mileage calculator, bike mileage calculator, and trip fuel cost planner in ₹.",
+  keywords = "car mileage, bike mileage, car mileage calculator, bike mileage calculator, fronx car mileage, ertiga car mileage, swift car mileage, baleno car mileage, brezza car mileage, jimny car mileage, bajaj cng bike mileage, ronin bike mileage, platina bike mileage, unicorn bike mileage, hunter bike mileage, splendor bike mileage",
+  robots = "index, follow",
+  ogType = "website"
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).toString();
 ---
 
 <!doctype html>
@@ -22,20 +31,29 @@ const {
     <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#171717" />
-    <link rel="canonical" href="https://realcarmileage.com" />
+    <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph / Social -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://realcarmileage.com" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://realcarmileage.com/web-app-manifest-512x512.png" />
     <meta property="og:site_name" content="Real Car Mileage" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="Real Car Mileage - Claimed vs real-world fuel economy and trip cost calculator" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Real Car Mileage - Claimed vs real-world fuel economy and trip cost calculator" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
