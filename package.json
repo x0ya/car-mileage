@@ -14,7 +14,8 @@
     "generate:data": "node scripts/build_vehicle_database.js",
     "check": "astro check",
     "lint": "eslint src scripts",
-    "test": "npm run generate:data && node scripts/validate_data.js"
+    "test": "npm run generate:data && node scripts/validate_data.js",
+    "deploy": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
